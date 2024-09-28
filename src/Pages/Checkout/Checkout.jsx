@@ -1,9 +1,35 @@
+import { useContext } from 'react';
 import { useLoaderData } from 'react-router-dom';
+import { AuthContext } from '../../Providers/Authprovider';
 
 const Checkout = () => {
     const service = useLoaderData();  // Access the loader data here
     const {title, price, service_id} = service
     console.log(service);
+    const {user} = useContext(AuthContext)
+
+
+    const handleBookService = event =>{
+        event.preventDefault();
+
+        const form = event.target;
+        const name = form.name.value;
+        const date = form.date.value;
+        const email = user?.email;
+       
+        const message  = form.message.value;
+        const order = {
+            customer_Name: name,
+            email,
+            date,
+            service: service_id,
+            price: parseInt(price),
+            message,
+        }
+
+        console.log(order);
+        
+    }
     
 
     return (
@@ -14,7 +40,7 @@ const Checkout = () => {
             <div className='flex justify-center my-5'>
                 <div className="card w-full shadow-2xl bg-slate-100 mx-20 py-10">
 
-                    <form className="card-body ">
+                    <form onSubmit={handleBookService} className="card-body ">
                         <div className='grid lg:grid-cols-2 grid-cols-1 gap-4 '>
                             <div className="form-control">
 
@@ -24,7 +50,8 @@ const Checkout = () => {
                                 <input 
                                 type="text"
                                 name='name'
-                                placeholder="Your Name" 
+                                defaultValue={user?.displayName}
+                                // placeholder="Your Name" 
                                 className="input input-bordered"  required />
                             </div>
 
@@ -45,8 +72,9 @@ const Checkout = () => {
                                 </label>
                                 <input 
                                 type="email" 
-                                name='email' 
-                                placeholder="Email" 
+                                name='email'
+                                defaultValue={user ?.email}
+                                // placeholder="Email" 
                                 className="input input-bordered"  required />
                             </div>
 
@@ -55,11 +83,12 @@ const Checkout = () => {
                                     <span className="label-text">Due Amount </span>
                                 </label>
                                 <input 
-                                type="text" 
-                                defaultValue={'$'+price}
-                                
+                                type="text"
+                                defaultValue={`$${price}`}
+                                name='price'
                                 placeholder="Amount" 
-                                className="input input-bordered"  required />
+                                className="input input-bordered"
+                                  required />
                             </div>
                         </div>
 
@@ -75,7 +104,9 @@ const Checkout = () => {
                             </div>
 
                         <div className="form-control mt-6">
-                            <button className="btn btn-primary">Login</button>
+                            <button 
+                            value="order"
+                            className="btn btn-primary">Oder Confirm</button>
                         </div>
                     </form>
 
