@@ -71,7 +71,7 @@ const Login = () => {
                             </div>
 
                             <div className="text-center mb-10">
-                                <h2 className="text-[#737373] ">New to? <Link className="text-[#FF3811] font-bold " to="/signup" > Sign up </Link>  </h2>
+                                <h2 className="text-[#737373] ">New to? <Link className="text-[#FF3811] font-bold " to="/signup" > Sign up </Link> </h2>
                             </div>
 
                         </form>

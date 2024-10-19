@@ -5,12 +5,12 @@ import Navbar from "../Pages/Shared/Navbar/Navbar";
 const Main = () => {
     return (
         <div >
-            <div className="mx-10">
+            <div className="lg:mx-10">
                 <Navbar></Navbar>
                 <Outlet></Outlet>
             </div>
 
-            <div className="">
+            <div className="my-5">
                 <Footer></Footer>
             </div>
             
