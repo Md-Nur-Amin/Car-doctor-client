@@ -89,51 +89,50 @@ const MyBookings = () => {
         });
     };
 
-    // const handleBookingConfirm = id =>{
-    //     fetch(`http://localhost:4000/booking/${id}`, {
-    //         method: 'PATCH',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //         },
-    //         body:  JSON.stringify({ status: 'confirmed' })
-
-    //     })
-    //     .then(res => res.json())
-    //     .then(data => {
-    //         console.log(data);
-    //         if(data.modifiedCount > 0){
-    //         //update status
-    //         const remaining = bookings.filter(booking => booking._id !== id )
-    //         const update = bookings.find(booking => booking._id === id );
-    //         update.status = 'confirm'
-    //         const newBookings = [updated, ...remaining] ;
-    //         setBookings(newBookings);
-
-    //         }
-    //     })
-    // }
-
-    const handleBookingConfirm = (id) => {
+    const handleBookingConfirm = id =>{
         fetch(`http://localhost:4000/booking/${id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ status: 'confirm' }), // Ensure the status matches your expected value
+            body:  JSON.stringify({ status: 'confirmed' })
+
         })
-            .then((res) => res.json())
-            .then((data) => {
-                if (data.modifiedCount > 0) {
-                    // Update the status in state
-                    const updatedBookings = bookings.map((booking) =>
-                        booking._id === id ? { ...booking, status: 'confirm' } : booking
-                    );
-                    setBookings(updatedBookings);
-                    console.log('Booking confirmed:', data);
-                }
-            })
-            .catch((error) => console.error('Error confirming booking:', error));
-    };
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+            if(data.modifiedCount > 0){
+            //update status
+            const remaining = bookings.filter(booking => booking._id !== id )
+            const updated = bookings.find(booking => booking._id === id );
+            updated.status = 'confirm'
+            const newBookings = [updated, ...remaining] ;
+            setBookings(newBookings);
+            }
+        })
+    }
+
+    // const handleBookingConfirm = (id) => {
+    //     fetch(`http://localhost:4000/booking/${id}`, {
+    //         method: 'PATCH',
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //         },
+    //         body: JSON.stringify({ status: 'confirm' }), // Ensure the status matches your expected value
+    //     })
+    //         .then((res) => res.json())
+    //         .then((data) => {
+    //             if (data.modifiedCount > 0) {
+    //                 // Update the status in state
+    //                 const updatedBookings = bookings.map((booking) =>
+    //                     booking._id === id ? { ...booking, status: 'confirm' } : booking
+    //                 );
+    //                 setBookings(updatedBookings);
+    //                 console.log('Booking confirmed:', data);
+    //             }
+    //         })
+    //         .catch((error) => console.error('Error confirming booking:', error));
+    // };
 
 
 
