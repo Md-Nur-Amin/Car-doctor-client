@@ -5,12 +5,15 @@ import { FaFacebookF } from "react-icons/fa6";
 import { FaLinkedinIn } from "react-icons/fa";
 
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from '../../Providers/Authprovider';
 
 const Signup = () => {
 
     const {createUser} = useContext(AuthContext);
+    const location = useLocation();
+    console.log(location);
+    const navigate = useNavigate()
 
 
     const handleSignUp = event =>{
@@ -25,6 +28,7 @@ const Signup = () => {
         .then(result => {
             const user = result.user;
             console.log(user);
+            // navigate(location?.state?.from?.pathname || '/', { replace: true });
         })
         .catch( error=> console.log(error))
     }
